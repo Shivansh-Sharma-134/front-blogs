@@ -1,11 +1,15 @@
 import React,{useEffect,useState} from "react"
-import Navbar from "./components/navbar"
+import { Route, Router, Routes } from "react-router-dom"
+import Home from "./components/Home"
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />}/>
+    </Routes>
     </>
   )
 }
