@@ -18,7 +18,7 @@ function Navbar({blogs,users,user}) {
           <>
         <li><a href="/about" className="block   px-4 py-6 h-full hover:text-black hover:bg-white">About</a></li>
         <li><a href="/log-in" className="block  px-4 py-6 h-full hover:text-black hover:bg-white">Log In</a></li>
-        <li><a href="/sign-up" className="block px-4 py-6 h-full hover:text-black hover:bg-white">Log In</a></li>
+        <li><a href="/sign-up" className="block px-4 py-6 h-full hover:text-black hover:bg-white">Sign Up</a></li>
           </>
         )}
       </ul>
