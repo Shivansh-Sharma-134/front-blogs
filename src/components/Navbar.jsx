@@ -1,7 +1,25 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-function Navbar({blogs,users,user}) {
 
+function Navbar({blogs,users,user,setAuthKey}) {
+  const navigate = useNavigate();
+  async function handleLogout() {
+    const res = await fetch("/api/users/logout",{
+      method: "GET",
+      credentials: 'include',
+    })
+    if(res.ok){
+      setAuthKey(prev=> prev+1);
+      navigate("/")
+    }
+    else{
+      console.log("logout error");
+    }
+
+  }
+  
+  
   return (
      <nav className="bg-gray-800 text-white pl-5 h-20 flex justify-between items-center ">
       <a href='/'>
@@ -12,7 +30,7 @@ function Navbar({blogs,users,user}) {
           <>
         <li><a href="/profile" className="block px-4 py-6 h-full hover:text-black hover:bg-white text-center">Profile</a></li>
         <li><a href="/newBlog" className="block  px-4 py-6 h-full hover:text-black hover:bg-white">New Blog</a></li>
-        <li><a href="/log-out" className="block px-4 py-6 h-full hover:text-white hover:bg-orange">Logout</a></li>
+        <li><button onClick={handleLogout} className="block px-4 py-6 h-full hover:text-black hover:bg-white">Logout</button></li>
           </>
         ):(
           <>

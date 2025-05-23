@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Blogs from './Blogs'
 
 
-function Home() {
+function Home({setAuthKey}) {
 
   const [blogs,setBlogs] = useState([]);
       const [users,setUsers] = useState([]);
@@ -21,7 +21,7 @@ function Home() {
 
   return (
     <>
-      <Navbar blogs={blogs} users={users} user={user} />
+      <Navbar blogs={blogs} users={users} user={user} setAuthKey={setAuthKey}/>
       <Blogs blogs={blogs} users={users} user={user} />
     </>
   )
