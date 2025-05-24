@@ -1,8 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Userdata from '../hooks/data';
 
 
-function Navbar({blogs,users,user,setAuthKey}) {
+function Navbar({setAuthKey}) {
+  const {user} = Userdata();
   const navigate = useNavigate();
   async function handleLogout() {
     const res = await fetch("/api/users/logout",{

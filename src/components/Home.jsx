@@ -10,7 +10,7 @@ function Home({setAuthKey}) {
 
   return (
     <>
-      <Navbar blogs={blogs} users={users} user={user} setAuthKey={setAuthKey}/>
+      <Navbar setAuthKey={setAuthKey}/>
       <Blogs blogs={blogs} users={users} user={user} />
     </>
   )

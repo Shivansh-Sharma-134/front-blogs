@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import deleteBlogs from '../hooks/deleteBlogs';
 
 function Blogs({blogs,users,user}) {
+  async function handleDelete(id) {
+    const data = await deleteBlogs(id);
+    if(data.success){
+      window.location.reload();
+    }
+    else{
+      console.error("failed to delete blog")
+    }
+  }
+  
   return (
     <div className="max-w-3xl mx-auto mt-8 px-4">
     {user ? <h3 className="text-2xl font-semibold mb-6">Welcome {user.firstname}</h3> :  <h3 className="text-2xl font-semibold mb-6">Welcome to Bloggit!!</h3> }
@@ -15,7 +26,7 @@ function Blogs({blogs,users,user}) {
                 <>
                 <p className="font-medium">Author: {users.find(u=> u.id === blog.userid).username}</p>
                 <p className="font-medium">Created: {new Date(blog.created).toLocaleDateString()}</p>
-                {user.admin && <a className="text-red-600 hover:underline mt-2 inline-block" href='/blogs/delete/<%= blog.id%>'>Delete</a>}
+                {user.admin && <button className="text-red-600 hover:underline mt-2 inline-block" onClick={()=> handleDelete(blog.id)}>Delete</button>}
                 </>
             )}
             </div>
