@@ -32,6 +32,7 @@ function Navbar({setAuthKey}) {
           <>
         <li><a href="/profile" className="block px-4 py-6 h-full hover:text-black hover:bg-white text-center">Profile</a></li>
         <li><a href="/newBlog" className="block  px-4 py-6 h-full hover:text-black hover:bg-white">New Blog</a></li>
+        <li><a href="/about" className="block   px-4 py-6 h-full hover:text-black hover:bg-white">About</a></li>
         <li><button onClick={handleLogout} className="block px-4 py-6 h-full hover:text-black hover:bg-white">Logout</button></li>
           </>
         ):(
