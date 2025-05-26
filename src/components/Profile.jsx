@@ -22,8 +22,8 @@ function Profile() {
     <Navbar />
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
     <h1 className="text-3xl font-bold mb-4">Hello {user.firstname}</h1>
-    {user.membership ? <h4 className="text-green-600 font-semibold mb-2">Membership Active </h4> : <a href="/users/membershipapply"><button className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Apply for membership</button></a>}
-    {user.admin ?  <h4  className="text-purple-600 font-semibold mb-4"> Admin </h4> :<a href="/users/adminapply"><button className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Apply to become an admin</button></a>}
+    {user.membership ? <h4 className="text-green-600 font-semibold mb-2">Membership Active </h4> : <a href="/member"><button className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Apply for membership</button></a>}
+    {user.admin &&  <h4  className="text-purple-600 font-semibold mb-4"> Admin </h4>}
         <div className="space-y-1 text-gray-700 mb-6">
         <p>Name: {user.firstname} {user.lastname}</p>
         <p>username: {user.username}</p>

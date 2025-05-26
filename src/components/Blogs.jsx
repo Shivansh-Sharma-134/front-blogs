@@ -13,7 +13,7 @@ function Blogs({blogs,users,user}) {
   }
   
   return (
-    <div className="max-w-3xl mx-auto mt-8 px-4">
+    <div className=" mx-auto mt-8 px-4">
     {user ? <h3 className="text-2xl font-semibold mb-6">Welcome {user.firstname}</h3> :  <h3 className="text-2xl font-semibold mb-6">Welcome to Bloggit!!</h3> }
     <div className="space-y-6">
     {blogs.map(blog =>(

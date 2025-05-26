@@ -1,7 +1,10 @@
 import React from 'react'
 import { Mail, Linkedin, Github } from 'lucide-react';
+import Navbar from './Navbar';
 function About() {
   return (
+    <>
+    <Navbar />
    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
       <h1 className="text-3xl font-bold text-blue-700 mb-4">Welcome to Bloggit!!</h1>
       <p className="text-gray-700 mb-2">
@@ -44,6 +47,7 @@ function About() {
         </a>
       </div>
     </div>
+  </>
   )
 }
 
