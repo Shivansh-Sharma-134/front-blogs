@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+const API_URL = import.meta.env.API_URL || "";
 
 
 function Login(){
@@ -25,7 +25,7 @@ function Login(){
         formData.append("username",username);
         formData.append("password",password);
         
-        const res = await fetch("/api/users/login",{
+        const res = await fetch(`${API_URL}/api/users/login`,{
             method: "POST",
             body: formData,
             credentials: "include",
