@@ -4,6 +4,7 @@ function Userdata() {
     const [blogs,setBlogs] = useState([]);
     const [users,setUsers] = useState([]);
     const [user,setUser] = useState(null);
+    const [likes,setLikes] = useState([])
     useEffect(()=>{
         async function getData(){
             try{
@@ -14,6 +15,7 @@ function Userdata() {
               const data = await res.json();
                 setBlogs(data.blogs);
                 setUsers(data.users);
+                setLikes(data.likes);
                 setUser(data.user);
               } catch (err){
                 console.error("error fetching data");
@@ -23,7 +25,7 @@ function Userdata() {
             getData();
 
           }, [])
-    return {blogs,users,user}
+    return {blogs,users,likes,user}
 }
 
 export default Userdata

@@ -6,12 +6,12 @@ import Userdata from '../hooks/data';
 
 function Home({setAuthKey}) {
 
-  const {blogs,users,user} = Userdata();
+  const {blogs,users,likes,user} = Userdata();
 
   return (
     <>
       <Navbar setAuthKey={setAuthKey}/>
-      <Blogs blogs={blogs} users={users} user={user} />
+      <Blogs blogs={blogs} users={users} user={user} likes={likes} />
     </>
   )
 }

@@ -1,5 +1,6 @@
 import React,{ useState } from "react"
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 function NewBlog() {
   const[title,setTitle]=useState('');
@@ -39,6 +40,8 @@ function NewBlog() {
         }
     }
     return (
+        <>
+        <Navbar />
    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl">
     <h1 className="text-2xl font-semibold mb-6 text-center" >New Blog</h1>
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -59,6 +62,7 @@ function NewBlog() {
     {errors.form && <p className="text-red-600 text-sm mt-1">{errors.form}</p>}
     </form>
         </div>
+        </>
   )
 }
 
