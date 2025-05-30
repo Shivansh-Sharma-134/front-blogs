@@ -57,7 +57,7 @@ function Login(){
     {errors.username && <p className="text-red-600 text-sm mt-1">{errors.username}</p>}
     
     <label htmlFor="password" className="block font-medium text-gray-700">Password</label>
-    <input id="password" name="password" placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    <input id="password" name="password" placeholder="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
     
     {errors.password && <p className="text-red-600 text-sm mt-1">{errors.password}</p>}
     
