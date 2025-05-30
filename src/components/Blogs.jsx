@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import deleteBlogs from '../hooks/deleteBlogs';
-import { Heart,HeartHandshake } from 'lucide-react';
+import { Heart } from 'lucide-react';
 function Blogs({blogs,users,user,likes}) {
   const[likedBlogs,setLikedBlogs] = useState({})
- 
+  const [likeCount, setLikeCount] = useState({});
+  
   useEffect(() => {
   if (user) {
     if (Object.keys(likedBlogs).length === 0) {
@@ -16,11 +17,18 @@ function Blogs({blogs,users,user,likes}) {
         return acc;
       }, {});
 
+      const likeC = likes.reduce((acc, like) => {
+        const blogId = like.blogid;
+        acc[blogId] = (acc[blogId] || 0) + 1;
+        return acc;
+       }, {}); 
+       setLikeCount(likeC)
       setLikedBlogs(userLikedObj);
 
       console.log("userLikedBlogIds", userLikedBlogIds);
     }
   } else {
+    setLikeCount({});
     setLikedBlogs({});
   }
 }, [user, likes]);
@@ -49,6 +57,10 @@ console.log(likedBlogs)
       credentials:"include",
     });
 
+    setLikeCount((prev) => ({
+      ...prev,
+       [blogid]: (prev[blogid] || 0) - 1
+    }));
     }else{
 
     res = await fetch("/api/blogs/like",{
@@ -57,6 +69,10 @@ console.log(likedBlogs)
       credentials:"include",
     });
 
+    setLikeCount((prev) => ({
+      ...prev,
+       [blogid]: (prev[blogid] || 0) + 1
+    }));
   }
   
   const data=await res.json();
@@ -86,7 +102,7 @@ console.log(likedBlogs)
                 
                 <button onClick={()=> addRemoveLike(user.id,blog.id)}  className="flex items-center space-x-2 text-pink-600 hover:text-pink-800">
               {likedBlogs[blog.id] ? <Heart fill='pink' size={18} /> : <Heart  size={18} />}
-              Like {blog.likes}</button>
+              Like {likeCount[blog.id]}</button>
                 <p className="font-medium">Author: {users.find(u=> u.id === blog.userid).username}</p>
                 <p className="font-medium">Created: {new Date(blog.created).toLocaleDateString()}</p>
                 {user.admin && <button className="text-red-600 hover:underline mt-2 inline-block" onClick={()=> handleDelete(blog.id)}>Delete</button>}

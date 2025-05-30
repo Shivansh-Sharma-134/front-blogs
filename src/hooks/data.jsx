@@ -12,6 +12,7 @@ function Userdata() {
                   method: "GET",
                   credentials:"include",
               });
+              console.log("check");
               const data = await res.json();
                 setBlogs(data.blogs);
                 setUsers(data.users);
