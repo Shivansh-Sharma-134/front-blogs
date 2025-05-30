@@ -1,13 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import deleteBlogs from '../hooks/deleteBlogs';
-import { Heart } from 'lucide-react';
+import { Heart,HeartHandshake } from 'lucide-react';
 function Blogs({blogs,users,user,likes}) {
-  const[likedBlogs,setLikedBlogs] = useState()
-  if(user){
-  const userLikedBlogIds = likes.filter(like => like.userid === user.id).map(like => like.blogid);
-  setLikedBlogs(userLikedBlogIds);
-  console.log(userLikedBlogIds);
+  const[likedBlogs,setLikedBlogs] = useState({})
+ 
+  useEffect(() => {
+  if (user) {
+    if (Object.keys(likedBlogs).length === 0) {
+      const userLikedBlogIds = likes
+        .filter((like) => like.userid === user.id)
+        .map((like) => like.blogid);
+
+      const userLikedObj = userLikedBlogIds.reduce((acc, curr) => {
+        acc[curr] = true;
+        return acc;
+      }, {});
+
+      setLikedBlogs(userLikedObj);
+
+      console.log("userLikedBlogIds", userLikedBlogIds);
+    }
+  } else {
+    setLikedBlogs({});
   }
+}, [user, likes]);
+
+console.log(likedBlogs)
   async function handleDelete(id) {
     const data = await deleteBlogs(id);
     if(data.success){
@@ -18,25 +36,39 @@ function Blogs({blogs,users,user,likes}) {
     }
   }
   
-  async function addLike(userid,blogid) {
+  async function addRemoveLike(userid,blogid) {
+    
     const formdata = new URLSearchParams();
     formdata.append("userid",userid);
     formdata.append("blogid",blogid);
-    const res = await fetch("/api/blogs/like",{
+    let res;
+    if(likedBlogs[blogid]){
+    res = await fetch("/api/blogs/dislike",{
       method: "POST",
       body: formdata,
       credentials:"include",
     });
 
-    const data=await res.json();
+    }else{
+
+    res = await fetch("/api/blogs/like",{
+      method: "POST",
+      body: formdata,
+      credentials:"include",
+    });
+
+  }
+  
+  const data=await res.json();
 
     if(data.success){
       setLikedBlogs((prev) => ({
         ...prev,
-        [id]: !prev[id]
+        [blogid]: !prev[blogid]
       }))
-    }
-
+     }else {
+      console.error("Failed to toggle like");
+     }
   }
 
   return (
@@ -52,8 +84,8 @@ function Blogs({blogs,users,user,likes}) {
             {user && (
                 <>
                 
-                <button onClick={()=> addLike(user.id,blog.id)}  className="flex items-center space-x-2 text-pink-600 hover:text-pink-800">
-              {likedBlogs[blog.id] ? <HeartHandshake size={18} /> : <Heart size={18} />}
+                <button onClick={()=> addRemoveLike(user.id,blog.id)}  className="flex items-center space-x-2 text-pink-600 hover:text-pink-800">
+              {likedBlogs[blog.id] ? <Heart fill='pink' size={18} /> : <Heart  size={18} />}
               Like {blog.likes}</button>
                 <p className="font-medium">Author: {users.find(u=> u.id === blog.userid).username}</p>
                 <p className="font-medium">Created: {new Date(blog.created).toLocaleDateString()}</p>
