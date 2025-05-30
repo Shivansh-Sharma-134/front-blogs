@@ -102,7 +102,7 @@ console.log(likedBlogs)
                 
                 <button onClick={()=> addRemoveLike(user.id,blog.id)}  className="flex items-center space-x-2 text-pink-600 hover:text-pink-800">
               {likedBlogs[blog.id] ? <Heart fill='pink' size={18} /> : <Heart  size={18} />}
-              Like {likeCount[blog.id]}</button>
+              Like {likeCount[blog.id]||"0"}</button>
                 <p className="font-medium">Author: {users.find(u=> u.id === blog.userid).username}</p>
                 <p className="font-medium">Created: {new Date(blog.created).toLocaleDateString()}</p>
                 {user.admin && <button className="text-red-600 hover:underline mt-2 inline-block" onClick={()=> handleDelete(blog.id)}>Delete</button>}
