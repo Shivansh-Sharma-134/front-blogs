@@ -65,6 +65,13 @@ function Login(){
     
     {errors.form && <p className="text-red-600 text-sm mt-1">{errors.form}</p>}
     </form>
+        <br />
+        <span className="text-sm">
+      Dont have an account?{" "}
+      <a href="/sign-up" className="text-blue-600 hover:underline">
+        Sign up
+      </a>
+    </span>
         </div>
         </>
     )
