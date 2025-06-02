@@ -49,7 +49,7 @@ function Signup() {
         }
         const data = await res.json();
         if(data.success){
-            navigate("/")
+            navigate("/log-in")
         }
 
     }

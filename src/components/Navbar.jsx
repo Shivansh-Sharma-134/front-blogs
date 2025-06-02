@@ -13,7 +13,7 @@ function Navbar({setAuthKey}) {
     })
     if(res.ok){
       setAuthKey(prev=> prev+1);
-      navigate("/")
+      navigate("/sign-up")
     }
     else{
       console.log("logout error");
