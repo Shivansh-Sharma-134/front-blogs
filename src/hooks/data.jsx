@@ -4,7 +4,8 @@ function Userdata() {
     const [blogs,setBlogs] = useState([]);
     const [users,setUsers] = useState([]);
     const [user,setUser] = useState(null);
-    const [likes,setLikes] = useState([])
+    const [likes,setLikes] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
         async function getData(){
             try{
@@ -20,13 +21,15 @@ function Userdata() {
                 setUser(data.user);
               } catch (err){
                 console.error("error fetching data");
+              } finally {
+                setLoading(false);
               }
             }
 
             getData();
 
           }, [])
-    return {blogs,users,likes,user}
+    return {blogs,users,likes,user,loading}
 }
 
 export default Userdata

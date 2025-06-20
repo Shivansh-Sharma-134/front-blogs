@@ -7,8 +7,14 @@ import Signup from './Signup';
 
 function Home({setAuthKey}) {
   
-  const {blogs,users,likes,user} = Userdata();
-  console.log('home',user);
+  const {blogs,users,likes,user,loading} = Userdata();
+  if (loading) {
+  return (
+    <div className="flex justify-center items-center min-h-screen text-xl text-gray-600">
+      Loading...
+    </div>
+  );
+}
   
   return (
     <>

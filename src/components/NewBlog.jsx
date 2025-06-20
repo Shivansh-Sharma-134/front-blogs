@@ -1,6 +1,7 @@
 import React,{ useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import Bloggit_Background from '../assets/images/Bloggit_Background.jpeg';
 
 function NewBlog() {
   const[title,setTitle]=useState('');
@@ -41,28 +42,60 @@ function NewBlog() {
     }
     return (
         <>
-        <Navbar />
-   <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl">
-    <h1 className="text-2xl font-semibold mb-6 text-center" >New Blog</h1>
-    <form onSubmit={handleSubmit} className="space-y-4">
+      <Navbar />
+      <div
+        className="min-h-screen bg-cover bg-center flex  justify-center px-4"
+        style={{ backgroundImage: `url(${Bloggit_Background})` }}
+      >
+        <div className="w-full max-w-3xl mt-6 mb-120 bg-white/60 backdrop-blur-lg rounded-2xl shadow-2xl p-10">
+          <h1 className="text-4xl font-bold mb-6 text-center text-blue-800">
+            New Blog!!!
+          </h1>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="blogtitle" className="block font-medium text-gray-700">
+                Blog Title
+              </label>
+              <input
+                id="blogtitle"
+                name="blogtitle"
+                placeholder="Enter your blog title..."
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.title && <p className="text-red-600 text-sm mt-1">{errors.title}</p>}
+            </div>
 
-    <label htmlFor="blogtitle" className="block font-medium text-gray-700">Please Enter the title for your Blog!!</label>
-    <input id="blogtitle" name="blogtitle" placeholder="Enter Title...." type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-    
-    {errors.title && <p className="text-red-600 text-sm mt-1">{errors.title}</p>}
-    
-    <label htmlFor="blogtext" className="block font-medium text-gray-700">Enter your blog</label>
-    <textarea name="blogtext" id="blogtext" rows={6} placeholder="Type your Blog here....." type="text" value={text} onChange={(e) => setText(e.target.value)} className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-    
-    
-    {errors.text && <p className="text-red-600 text-sm mt-1">{errors.text}</p>}
-    
-    <button type='submit' className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200">Submit</button>
-    
-    {errors.form && <p className="text-red-600 text-sm mt-1">{errors.form}</p>}
-    </form>
+            <div>
+              <label htmlFor="blogtext" className="block font-medium text-gray-700">
+                Blog Content
+              </label>
+              <textarea
+                name="blogtext"
+                id="blogtext"
+                rows={6}
+                placeholder="Write your blog here..."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              ></textarea>
+              {errors.text && <p className="text-red-600 text-sm mt-1">{errors.text}</p>}
+            </div>
+            <div className="flex justify-center">
+            <button
+              type='submit'
+              className="w-40 bg-blue-600  text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+            >
+              Submit Blog
+            </button>
+            </div>
+            {errors.form && <p className="text-red-600 text-sm mt-1 text-center">{errors.form}</p>}
+          </form>
         </div>
-        </>
+      </div>
+    </>
   )
 }
 
