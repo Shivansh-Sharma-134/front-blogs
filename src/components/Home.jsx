@@ -6,9 +6,10 @@ import Signup from './Signup';
 
 
 function Home({setAuthKey}) {
-
+  
   const {blogs,users,likes,user} = Userdata();
-
+  console.log('home',user);
+  
   return (
     <>
     {user?

@@ -12,8 +12,8 @@ function Userdata() {
                   method: "GET",
                   credentials:"include",
               });
-              console.log("check");
               const data = await res.json();
+              console.log("check",data.user);
                 setBlogs(data.blogs);
                 setUsers(data.users);
                 setLikes(data.likes);

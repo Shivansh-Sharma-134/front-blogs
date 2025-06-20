@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import deleteBlogs from '../hooks/deleteBlogs';
 import { Heart } from 'lucide-react';
+import Bloggit_Background from '../assets/images/Bloggit_Background.jpeg';
+
 function Blogs({blogs,users,user,likes}) {
   const[likedBlogs,setLikedBlogs] = useState({})
   const [likeCount, setLikeCount] = useState({});
@@ -88,31 +90,55 @@ console.log(likedBlogs)
   }
 
   return (
-    <div className=" mx-auto mt-8 px-4">
-    {user ? <h3 className="text-2xl font-semibold mb-6">Welcome {user.firstname}</h3> :  <h3 className="text-2xl font-semibold mb-6">Welcome to Bloggit!!</h3> }
-    <div className="space-y-6">
-    {blogs.map(blog =>(
-        <div key={blog.id} className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="text-xl font-bold text-gray-800">{blog.title}</h4>
-            <p className="mt-2 text-gray-700">{blog.text}</p>
-            <br />
-            <div className="mt-4 text-sm text-gray-600">
-            {user && (
+   <div
+  className="min-h-screen bg-cover bg-center"
+  style={{ backgroundImage: `url(${Bloggit_Background})` }}
+>
+  <div className="px-4 py-16 max-w-4xl mx-auto">
+    <div className="backdrop-blur-xl bg-white/60 rounded-3xl p-8 shadow-xl">
+      {user ? (
+        <h3 className="text-3xl font-bold mb-10 text-gray-800">Welcome {user.firstname}</h3>
+      ) : (
+        <h3 className="text-3xl font-bold mb-10 text-gray-800">Welcome to Bloggit!!</h3>
+      )}
+
+      <div className="space-y-6">
+        {blogs.map((blog) => (
+          <div key={blog.id} className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+            <h4 className="text-2xl font-bold text-gray-900">{blog.title}</h4>
+            <p className="mt-3 text-gray-700">{blog.text}</p>
+            <div className="mt-5 text-sm text-gray-600">
+              {user && (
                 <>
-                
-                <button onClick={()=> addRemoveLike(user.id,blog.id)}  className="flex items-center space-x-2 text-pink-600 hover:text-pink-800">
-              {likedBlogs[blog.id] ? <Heart fill='pink' size={18} /> : <Heart  size={18} />}
-              Like {likeCount[blog.id]||"0"}</button>
-                <p className="font-medium">Author: {users.find(u=> u.id === blog.userid).username}</p>
-                <p className="font-medium">Created: {new Date(blog.created).toLocaleDateString()}</p>
-                {user.admin && <button className="text-red-600 hover:underline mt-2 inline-block" onClick={()=> handleDelete(blog.id)}>Delete</button>}
+                  <button
+                    onClick={() => addRemoveLike(user.id, blog.id)}
+                    className="flex items-center space-x-2 text-pink-600 hover:text-pink-800"
+                  >
+                    {likedBlogs[blog.id] ? <Heart fill="pink" size={18} /> : <Heart size={18} />}
+                    <span>Like {likeCount[blog.id] || "0"}</span>
+                  </button>
+
+                  <p className="mt-2 font-medium">Author: {users.find((u) => u.id === blog.userid).username}</p>
+                  <p className="font-medium">Created: {new Date(blog.created).toLocaleDateString()}</p>
+
+                  {user.admin && (
+                    <button
+                      className="text-red-600 hover:underline mt-2 inline-block"
+                      onClick={() => handleDelete(blog.id)}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </>
-            )}
+              )}
             </div>
-        </div>
-    ))}
+          </div>
+        ))}
+      </div>
     </div>
-    </div>
+  </div>
+</div>
+
   )
 }
 
