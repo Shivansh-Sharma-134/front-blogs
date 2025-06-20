@@ -25,7 +25,10 @@ function Navbar({setAuthKey}) {
   return (
      <nav className="bg-gray-800 text-white pl-5 h-20 flex justify-between items-center ">
       <a href='/'>
-      <div className="text-2xl font-bold ">Bloggit</div>
+   <div className="text-2xl font-bold">
+  <span className="text-red-600">B</span>
+  <span className="">loggit</span>
+</div>
       </a>
       <ul className="flex h-full ">
         {user ? (
