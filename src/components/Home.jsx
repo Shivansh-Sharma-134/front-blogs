@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar'
 import Blogs from './Blogs'
 import Userdata from '../hooks/data';
-import Signup from './Signup';
+import About from './About';
 
 
 function Home({setAuthKey}) {
@@ -20,7 +20,7 @@ function Home({setAuthKey}) {
     <>
     {user?
       <><Navbar setAuthKey={setAuthKey}/>
-      <Blogs blogs={blogs} users={users} user={user} likes={likes} /></>:<Signup />}
+      <Blogs blogs={blogs} users={users} user={user} likes={likes} /></>:<About />}
     </>
   )
 }
