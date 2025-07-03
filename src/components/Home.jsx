@@ -11,7 +11,7 @@ function Home({setAuthKey}) {
   if (loading) {
   return (
     <div className="flex justify-center items-center min-h-screen text-xl text-gray-600">
-      Loading...
+      Please wait as the server might take upto 30 seconds to wake up...
     </div>
   );
 }
